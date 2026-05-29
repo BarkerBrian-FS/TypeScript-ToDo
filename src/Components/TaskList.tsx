@@ -18,18 +18,25 @@ const TaskList = (props: IProps) => {
         return <tr key={item.id} 
         style={{display:"flex", justifyContent:"space-evenly"}}>
         <td>{index + 1}</td>
-        {
-            editTask?.id != item.id && (
+
+            {editTask?.id == item.id && <>
+            <td>
+                <input type="text" value={editTask.task}></input>
+            </td>
+            </>}
+            {editTask?.id != item.id && (
             <>
+                 <td>{item.task}</td>
                 <td>
                     <a href="#" onClick={()=>handleEdit(item)}>Edit</a>
                 </td>
-                 <td>{item.task}</td>
                 <td>
                     <a href="#" style={{color:"red"}} onClick={(event) => {event.preventDefault(); onDelete(item.id)}}>X</a>
                 </td>
             </>
-            )
+            
+             )
+            
         }
         </tr>
     }
