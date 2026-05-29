@@ -22,10 +22,23 @@ const Tasks = () => {
     const updatedList = taskList.filter(task => task.id != id  )
     setTaskList(updatedList)
   }
+
+  const handleUpdateTask = (item: ITask) => {
+    const cloneTaskList = [...taskList];
+
+    const index = taskList.findIndex((x: ITask) => x.id == item.id);
+
+    cloneTaskList[index].task = item.task;
+
+    setTaskList(cloneTaskList);
+  }
+
   return (
     <>
     <TaskForm onAdd={addNewTask} />
-    <TaskList list={taskList} onDelete={deleteTask} />
+    <div style={{marginTop: 10}}>
+      <TaskList list={taskList} onDelete={deleteTask} onUpdate={handleUpdateTask} />
+    </div>
     </>
   )
 }
