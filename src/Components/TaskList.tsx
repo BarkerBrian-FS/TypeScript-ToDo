@@ -1,4 +1,5 @@
 import type { ITask } from "./Tasks"
+import { useState } from "react"
 
 interface IProps {
     list: ITask[]
@@ -7,8 +8,11 @@ interface IProps {
 const TaskList = (props: IProps) => {
 
     const { list, onDelete } = props;
-    const handleEdit = () => {
-        
+
+    const [editTask, setEditTask ] = useState<ITask>();
+
+    const handleEdit = (item: ITask) => {
+        setEditTask(item)
     }
     const callBackTaskRender = (item: ITask, index: number) => {
         return <tr key={item.id} style={{display:"flex", justifyContent:"space-evenly"}}>
@@ -18,7 +22,7 @@ const TaskList = (props: IProps) => {
             <a href="#" style={{color:"red"}} onClick={(event) => {event.preventDefault(); onDelete(item.id)}}>X</a>
         </td>
         <td>
-            <a href="#" onClick={()=>handleEdit()}>Edit</a>
+            <a href="#" onClick={()=>handleEdit(item)}>Edit</a>
         </td>
         </tr>
     }
