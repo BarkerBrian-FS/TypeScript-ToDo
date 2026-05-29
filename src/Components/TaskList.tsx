@@ -15,15 +15,22 @@ const TaskList = (props: IProps) => {
         setEditTask(item)
     }
     const callBackTaskRender = (item: ITask, index: number) => {
-        return <tr key={item.id} style={{display:"flex", justifyContent:"space-evenly"}}>
+        return <tr key={item.id} 
+        style={{display:"flex", justifyContent:"space-evenly"}}>
         <td>{index + 1}</td>
-        <td>{item.task}</td>
-        <td>
-            <a href="#" style={{color:"red"}} onClick={(event) => {event.preventDefault(); onDelete(item.id)}}>X</a>
-        </td>
-        <td>
-            <a href="#" onClick={()=>handleEdit(item)}>Edit</a>
-        </td>
+        {
+            editTask?.id != item.id && (
+            <>
+                <td>
+                    <a href="#" onClick={()=>handleEdit(item)}>Edit</a>
+                </td>
+                 <td>{item.task}</td>
+                <td>
+                    <a href="#" style={{color:"red"}} onClick={(event) => {event.preventDefault(); onDelete(item.id)}}>X</a>
+                </td>
+            </>
+            )
+        }
         </tr>
     }
   return (
